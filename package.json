@@ -7,8 +7,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "start":
-      "export NODE_ENV=development; webpack-dev-server --config config/webpack/client.js"
+    "start": "export NODE_ENV=development; webpack-dev-server --config config/webpack/client.js"
   },
   "author": "Wyatt Lindsey",
   "repository": {
@@ -23,6 +22,8 @@
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
+    "redux-immutable-state-invariant": "^2.1.0",
+    "redux-logger": "^3.0.6",
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
