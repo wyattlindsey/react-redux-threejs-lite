@@ -5,11 +5,17 @@ import { Provider } from 'react-redux'
 import Store from './store'
 import reducers from './reducers'
 
-const store = Store.init({}, reducers)
+import App from 'components/App'
+
+const initialState = {
+  loading: {},
+}
+
+const store = Store.init(initialState, reducers)
 
 const Root = props => (
   <Provider store={store}>
-    <div>Hello World!!!</div>
+    <App {...props} />
   </Provider>
 )
 

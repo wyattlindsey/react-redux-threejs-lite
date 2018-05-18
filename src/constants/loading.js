@@ -1,0 +1,4 @@
+export const LOADING_STATES = {
+  LOADED: 'LOADED',
+  PENDING: 'PENDING',
+}
