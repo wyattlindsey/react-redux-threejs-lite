@@ -1,7 +1,13 @@
 import * as React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import debounce from 'lodash/debounce'
 
+import LoadingIndicator from 'components/LoadingIndicator'
+import ShapeViewport from 'components/ShapeViewport'
 import ThreeViewport from 'components/ThreeViewport'
+
+import { LOADING_STATES, LOADING_TARGETS } from 'constants/loading'
 
 const wrapperStyle = {
   fontFamily: 'Roboto',
@@ -18,6 +24,10 @@ class Main extends React.PureComponent {
     width: null,
   }
 
+  static PropTypes = {
+    loading: PropTypes.object.isRequired,
+  }
+
   componentDidMount() {
     const width = this.mainViewRef.clientWidth
     this.setState({ width })
@@ -27,6 +37,10 @@ class Main extends React.PureComponent {
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleResize)
+  }
+
+  get shapes() {
+    return props => <ShapeViewport {...props} />
   }
 
   /* eslint-disable no-invalid-this */
@@ -39,6 +53,8 @@ class Main extends React.PureComponent {
   /* eslint-enable no-invalid-this */
 
   render() {
+    const Shapes = props => <ShapeViewport {...props} />
+
     return (
       <div
         ref={c => {
@@ -47,12 +63,19 @@ class Main extends React.PureComponent {
         style={wrapperStyle}
       >
         <div>React Redux ThreeJS Lite</div>
+        <LoadingIndicator />
         <div style={threeViewportStyle}>
-          <ThreeViewport width={this.state.width} />
+          <ThreeViewport width={this.state.width}>
+            <Shapes />
+          </ThreeViewport>
         </div>
       </div>
     )
   }
 }
 
-export default Main
+export default connect(state => {
+  return {
+    loading: state.loading,
+  }
+})(Main)

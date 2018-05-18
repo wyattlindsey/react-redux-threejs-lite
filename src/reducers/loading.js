@@ -7,15 +7,15 @@ const initialState = {}
 const actions = {
   [LOADING_ACTIONS.SET_LOADED]: (state, action) => {
     return {
-      [action.key]: LOADING_STATES.LOADED,
       ...state,
+      [action.key]: LOADING_STATES.LOADED,
     }
   },
 
   [LOADING_ACTIONS.SET_PENDING]: (state, action) => {
     return {
-      [action.key]: LOADING_STATES.PENDING,
       ...state,
+      [action.key]: LOADING_STATES.PENDING,
     }
   },
 
