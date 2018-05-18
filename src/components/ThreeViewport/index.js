@@ -2,24 +2,23 @@ import * as React from 'react'
 import Store from 'store'
 import { setLoaded, setPending } from 'actions/loading'
 import { LOADING_TARGETS } from 'constants/loading'
-import { asyncComponent } from 'react-async-component'
+import Loadable from 'react-loadable'
 
-const asyncThreeViewport = asyncComponent({
-  name: 'ThreeViewport',
-  resolve: () => {
+const asyncThreeViewport = Loadable({
+  loader: () => {
     const promise = new Promise(resolve => {
       Store.dispatch(setPending(LOADING_TARGETS.THREE_VIEWPORT))
-
       setTimeout(() => {
-        import('./ThreeViewport').then(m => {
+        import('./ThreeViewport').then(module => {
           Store.dispatch(setLoaded(LOADING_TARGETS.THREE_VIEWPORT))
-          resolve(m)
+          resolve(module)
         })
-      }, 2000)
+      }, 1000)
     })
 
     return promise
   },
+  loading: () => null,
 })
 
 export default asyncThreeViewport

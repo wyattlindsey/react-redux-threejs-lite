@@ -2,24 +2,27 @@ import * as React from 'react'
 import Store from 'store'
 import { setLoaded, setPending } from 'actions/loading'
 import { LOADING_TARGETS } from 'constants/loading'
-import { asyncComponent } from 'react-async-component'
+import Loadable from 'react-loadable'
 
-const asyncShapeViewport = asyncComponent({
-  name: 'ShapeViewport',
-  resolve: () => {
+const asyncShapeViewport = Loadable({
+  delay: 500,
+  loader: () => {
     const promise = new Promise(resolve => {
       Store.dispatch(setPending(LOADING_TARGETS.SHAPE_VIEWPORT))
 
       setTimeout(() => {
-        import('./ShapeViewport').then(m => {
+        import('./ShapeViewport').then(module => {
           Store.dispatch(setLoaded(LOADING_TARGETS.SHAPE_VIEWPORT))
-          resolve(m)
+          resolve(module)
         })
-      }, 2000)
+      }, 1000)
     })
 
     return promise
   },
+  loading: () => null,
 })
 
-export default asyncShapeViewport
+// export default asyncShapeViewport
+
+export { default } from './ShapeViewport'
