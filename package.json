@@ -1,0 +1,11 @@
+{
+  "name": "react-redux-threejs-lite",
+  "version": "1.0.0",
+  "description": "Minimal scaffolding for React, Redux and ThreeJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Wyatt Lindsey",
+  "license": "ISC"
+}
