@@ -5,6 +5,18 @@ import { LOADING_TARGETS } from 'constants/loading'
 
 import Loadable from 'react-loadable'
 
+const loadingStyles = {
+  alignItems: 'center',
+  backgroundColor: 'black',
+  color: 'gray',
+  display: 'flex',
+  flexDirection: 'row',
+  height: '512px',
+  justifyContent: 'center',
+  fontSize: '1.5rem',
+  width: '100%',
+}
+
 const Loader = Loadable.Map({
   loader: {
     ThreeViewport: () => {
@@ -26,17 +38,15 @@ const Loader = Loadable.Map({
             Store.dispatch(setLoaded(LOADING_TARGETS.SHAPE_VIEWPORT))
             resolve(m)
           })
-        }, 3000)
+        }, 2000)
       )
     },
   },
-  loading: () => null,
+  loading: () => <div style={loadingStyles}>Please wait</div>,
   render(loaded, props) {
     const ThreeViewport = loaded.ThreeViewport.default
 
-    return (
-      <ThreeViewport {...props} />
-    )
+    return <ThreeViewport {...props} />
   },
 })
 
