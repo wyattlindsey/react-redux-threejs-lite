@@ -4,10 +4,23 @@ import { setLoaded, setPending } from 'actions/loading'
 import { LOADING_TARGETS } from 'constants/loading'
 import { asyncComponent } from 'react-async-component'
 
+const loadingStyles = {
+  alignItems: 'center',
+  backgroundColor: 'black',
+  color: 'gray',
+  display: 'flex',
+  flexDirection: 'row',
+  height: '512px',
+  justifyContent: 'center',
+  fontSize: '1.5rem',
+  width: '100%',
+}
+
 const asyncThreeViewport = asyncComponent({
   name: 'ThreeViewport',
+  LoadingComponent: () => <div style={loadingStyles}>Please wait</div>,
   resolve: () => {
-    const promise = new Promise(resolve => {
+    return new Promise(resolve => {
       Store.dispatch(setPending(LOADING_TARGETS.THREE_VIEWPORT))
 
       setTimeout(() => {
@@ -17,8 +30,6 @@ const asyncThreeViewport = asyncComponent({
         })
       }, 2000)
     })
-
-    return promise
   },
 })
 

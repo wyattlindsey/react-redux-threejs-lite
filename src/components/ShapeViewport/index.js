@@ -4,10 +4,22 @@ import { setLoaded, setPending } from 'actions/loading'
 import { LOADING_TARGETS } from 'constants/loading'
 import { asyncComponent } from 'react-async-component'
 
+const loadingStylesShapeViewport = {
+  alignItems: 'center',
+  backgroundColor: 'black',
+  color: 'gray',
+  display: 'flex',
+  flexDirection: 'row',
+  height: '512px',
+  justifyContent: 'center',
+  fontSize: '1.5rem',
+  width: '100%',
+}
+
 const asyncShapeViewport = asyncComponent({
   name: 'ShapeViewport',
   resolve: () => {
-    const promise = new Promise(resolve => {
+    return new Promise(resolve => {
       Store.dispatch(setPending(LOADING_TARGETS.SHAPE_VIEWPORT))
 
       setTimeout(() => {
@@ -17,8 +29,6 @@ const asyncShapeViewport = asyncComponent({
         })
       }, 2000)
     })
-
-    return promise
   },
 })
 
