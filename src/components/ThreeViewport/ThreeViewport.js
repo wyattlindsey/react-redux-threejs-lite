@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import React3 from 'react-three-renderer'
 import * as THREE from 'three'
 
+import ShapeViewport from 'components/ShapeViewport'
 import { LOADING_TARGETS, LOADING_STATES } from 'constants/loading'
 
 import throttle from 'lodash/throttle'
@@ -15,7 +16,6 @@ class ThreeViewport extends React.PureComponent {
   }
 
   static propTypes = {
-    children: PropTypes.any,
     width: PropTypes.number,
   }
 
@@ -63,7 +63,7 @@ class ThreeViewport extends React.PureComponent {
   }
 
   render() {
-    const { children, width } = this.props
+    const { width } = this.props
     const height = 512
 
     return width ? (
@@ -90,9 +90,7 @@ class ThreeViewport extends React.PureComponent {
             lookAt={this.scenePosition}
             position={this.lightPosition}
           />
-          {React.Children.map(children, child =>
-            React.cloneElement(child, { shouldUpdate: this.state.shouldUpdate })
-          )}
+          <ShapeViewport shouldUpdate={this.state.shouldUpdate} />
         </scene>
       </React3>
     ) : null

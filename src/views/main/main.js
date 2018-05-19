@@ -4,8 +4,7 @@ import { connect } from 'react-redux'
 import debounce from 'lodash/debounce'
 
 import LoadingIndicator from 'components/LoadingIndicator'
-import ShapeViewport from 'components/ShapeViewport'
-import ThreeViewport from 'components/ThreeViewport'
+import Loader from 'components/Loader'
 
 import { LOADING_STATES, LOADING_TARGETS } from 'constants/loading'
 
@@ -15,7 +14,7 @@ const wrapperStyle = {
   textAlign: 'center',
 }
 
-const threeViewportStyle = {
+const viewportStyle = {
   marginTop: '1rem',
 }
 
@@ -39,10 +38,6 @@ class Main extends React.PureComponent {
     window.removeEventListener('resize', this.handleResize)
   }
 
-  get shapes() {
-    return props => <ShapeViewport {...props} />
-  }
-
   /* eslint-disable no-invalid-this */
   handleResize = debounce(() => {
     if (typeof window === 'undefined') return
@@ -53,8 +48,6 @@ class Main extends React.PureComponent {
   /* eslint-enable no-invalid-this */
 
   render() {
-    const Shapes = props => <ShapeViewport {...props} />
-
     return (
       <div
         ref={c => {
@@ -64,10 +57,8 @@ class Main extends React.PureComponent {
       >
         <div>React Redux ThreeJS Lite</div>
         <LoadingIndicator />
-        <div style={threeViewportStyle}>
-          <ThreeViewport width={this.state.width}>
-            <Shapes />
-          </ThreeViewport>
+        <div style={viewportStyle}>
+          <Loader width={this.state.width} />
         </div>
       </div>
     )
