@@ -27,8 +27,6 @@ class ShapeViewport extends React.PureComponent {
   }
 
   render() {
-    // const { r, g, b } = this.state.color
-
     return (
       <Shapes.Cube
         color={new THREE.Color(`rgb(${10}, ${200}, ${50})`)}
