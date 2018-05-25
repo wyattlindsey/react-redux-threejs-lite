@@ -4,7 +4,7 @@ import { setLoaded, setPending } from 'actions/loading'
 import { LOADING_TARGETS } from 'constants/loading'
 import { asyncComponent } from 'react-async-component'
 
-const loadingStylesShapeViewport = {
+const loadingStyles = {
   alignItems: 'center',
   backgroundColor: 'black',
   color: 'gray',
