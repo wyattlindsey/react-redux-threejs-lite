@@ -39,10 +39,6 @@ class Main extends React.PureComponent {
     window.removeEventListener('resize', this.handleResize)
   }
 
-  get shapes() {
-    return props => <ShapeViewport {...props} />
-  }
-
   /* eslint-disable no-invalid-this */
   handleResize = debounce(() => {
     if (typeof window === 'undefined') return
@@ -53,8 +49,6 @@ class Main extends React.PureComponent {
   /* eslint-enable no-invalid-this */
 
   render() {
-    const Shapes = props => <ShapeViewport {...props} />
-
     return (
       <div
         ref={c => {
@@ -66,7 +60,7 @@ class Main extends React.PureComponent {
         <LoadingIndicator />
         <div style={threeViewportStyle}>
           <ThreeViewport width={this.state.width}>
-            <Shapes />
+            <ShapeViewport />
           </ThreeViewport>
         </div>
       </div>
